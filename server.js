@@ -36,11 +36,12 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 
+/*--------------------- functions -----------------------*/
 
 
 /*----------------------Fake Database--------------------*/
 
-const client = [
+/*const client = [
   {
     id: 1,
     name: "client1",
@@ -106,7 +107,7 @@ const orderList = [
     productID: 2,
     userID: 2
   }
-];
+];*/
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
@@ -120,12 +121,25 @@ app.get("/", (req, res) => {
 
 //Menu page
 app.get("/menu", (req, res) => {
-  let templateVars = {
-    products: products,
-    categories: categories,
-    orderList: orderList
-  };
-  res.render("menu", templateVars);
+  knex('products')
+    .select('*')
+    .asCallback(function(err,products){
+      if (err) return console.error(err);
+
+      knex.destroy();
+      knex('order_list')
+        .select("*")
+        .where({users_id: 1})
+        .asCallback(function(err, order_list) {
+          let templateVars = {
+            products: products,
+            order_list:order_list,
+          }
+          console.log("menu product & orderlist", templateVars);
+          res.render("menu", templateVars);
+        })
+
+    })
 });
 
 app.post("/menu", (req, res) => {
