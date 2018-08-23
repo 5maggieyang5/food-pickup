@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MrD</title>
+</head>
+<body>
+
+  <% include ./partials/navbar %>
+  <h1>Please Login:</h1>
+
+  <form method="POST" action="/login">
+    <div>
+      <label for="name">Name:</label>
+      <input id="user_name" type="text" name="user_name" placeholder="Your User Name" style="width: 300px" />
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password" placeholder="Your password" style="width: 300px" />
+    </div>
+
+    <div>
+      <button type="submit">Login</button>
+    </div>
+
+  </form>
+</body>
+</html>

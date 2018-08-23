@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MrD</title>
+</head>
+<body>
+
+  <% include ./partials/navbar %>
+  <h1>Please Register:</h1>
+
+  <form method="POST" action="/register">
+    <div>
+      <label for="name">Name:</label>
+      <input id="user_name" type="text" name="user_name" placeholder="Your User Name" style="width: 300px">
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" type="password" name="password" placeholder="Your password" style="width: 300px">
+    </div>
+
+    <div>
+      <label for="phone">Phone Number:</label>
+      <input id="phone" type="tel" name="phone" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" style="width: 300px" />
+    </div>
+
+    <div>
+      <button type="submit">Register</button>
+    </div>
+
+  </form>
+</body>
+</html>

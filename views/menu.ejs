@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MrD</title>
+</head>
+<body>
+
+  <% include ./partials/navbar %>
+
+  <h3>MAIN:</h3>
+    <ul>
+      <% for (let category of categories) { %>
+        <% if (category.name === "main") { %>
+          <% for (let product of products) { %>
+            <% if (product.categories_id === category.id) { %>
+                <form method="post" action="/add/<%= product.id%>">
+                <li> <%= product.name %> </li>
+                <p>Price: CAN$ <%= product.item_price%></p>
+                <label>Quantity: </label>
+                <input type="text" name="quantity" placeholder="quantity">
+                <button type="submit">Add to my order list!</button>
+            <% } %>
+          <% } %>
+        <% } %>
+      <% } %>
+    </ul>
+
+  <h3>SIDE:</h3>
+    <ul>
+      <% for (let category of categories) { %>
+        <% if (category.name === "side") { %>
+          <% for (let product of products) { %>
+            <% if (product.categories_id === category.id) { %>
+                <form method="post" action="/add/<%= product.id%>">
+                <li> <%= product.name %> </li>
+                <p>Price: CAN$ <%= product.item_price%></p>
+                <label>Quantity: </label>
+                <input type="text" name="quantity" placeholder="quantity">
+                <button type="submit">Add to my order list!</button>
+            <% } %>
+          <% } %>
+        <% } %>
+      <% } %>
+    </ul>
+
+  <h3>DRINK:</h3>
+    <ul>
+      <% for (let category of categories) { %>
+        <% if (category.name === "drink") { %>
+          <% for (let product of products) { %>
+            <% if (product.categories_id === category.id) { %>
+                <form method="post" action="/add/<%= product.id%>">
+                <li> <%= product.name %> </li>
+                <p>Price: CAN$ <%= product.item_price%></p>
+                <label>Quantity: </label>
+                <input type="text" name="quantity" placeholder="quantity">
+                <button type="submit">Add to my order list!</button>
+            <% } %>
+          <% } %>
+        <% } %>
+      <% } %>
+    </ul>
+
+  <div>
+    <h3>My Order List: </h3>
+
+    <table>
+
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+      </tr>
+
+      <tr>
+        for (let item of orderList) {
+          for (let product of products) {
+            if (item.productID === product.id) {
+              product.name
+              product.item_price
+
+          }
+          }
+
+        }
+        <td></td>
+      </tr>
+    </table>
+
+
+  </div>
+
+</body>
+</html>
