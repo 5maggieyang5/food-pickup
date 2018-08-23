@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('client').insert({id: 1, name: 'Thomas', phone:  '647-000-1111'}),
         knex('client').insert({id: 2, name: 'Maggie', phone:  '647-111-2222'}),
-        knex('client').insert({id: 3, name: 'Chris',  phone:  '647-222-3333'}),
+        knex('client').insert({id: 3, name: 'Chris',  phone:  '647-222-3333'})
 
       ]);
     });

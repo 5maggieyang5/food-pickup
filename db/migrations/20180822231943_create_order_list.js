@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
       knex.schema.createTable('order_list', (table) => {
-        table.increments('id');
+        table.increments('id').primary();
         table.integer('main_id');
         table.integer('side_id');
         table.integer('drinks_id');

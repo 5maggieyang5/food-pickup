@@ -1,3 +1,4 @@
+db/settings.json
 node_modules/
 public/styles
 .env
