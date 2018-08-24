@@ -8,6 +8,7 @@ const express       = require("express");
 const bodyParser    = require("body-parser");
 const sass          = require("node-sass-middleware");
 const app           = express();
+const cookieSession = require('cookie-session');
 
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
@@ -22,6 +23,9 @@ const usersRoutes = require("./routes/users");
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
+app.use(cookieSession({
+  keys: ["Encrypted Cookie"]
+}));
 
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
@@ -48,15 +52,15 @@ app.use("/api/users", usersRoutes(knex));
 
 //Menu page
 app.get("/menu", (req, res) => {
+  // selects all columns from products table
   knex('products')
     .select('*')
     .asCallback(function(err,products){
       if (err) return console.error(err);
-      knex.destroy();
-
+      // selects all columns from order_list table where client_id = client_id inside a cookie
       knex('order_list')
         .select("*")
-        .where({client_id: 1})
+        .where({client_id: req.session.client_id})
         .asCallback(function(err, order_list) {
           let templateVars = {
             products: products,
@@ -98,9 +102,11 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+  // grabs user name and pass from whatever user entered
   const {user_name, password} = req.body;
   if (user_name  && password) {
-      res.redirect("/");
+/*    req.session.user_id = client_id;*/
+    res.redirect("/");
   } else {
     res.send("sorry, please provide all the infor.");
   }
@@ -113,21 +119,23 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
+  // grabs user name, phone, and pass from whatever user entered
   const {user_name, password, phone} = req.body;
   console.log("body: ", req.body)
   if (user_name && password && phone) {
+  // inserts name & phone into client table
     knex('client')
       .insert(
         {name: user_name, phone: phone}
       )
+      .returning("*")
       .asCallback(function(err,client) {
-
         if (err) {
            return console.error('ERROR', err);
         }
-
-        // console.log("client: ", client);
-        knex.destroy();
+        // CHECK WITH MENTOR
+        req.session.client_id = client[0].id;
+        console.log(req.session.client_id)
         res.redirect("/");
       })
   } else {
@@ -141,20 +149,16 @@ app.post("/add/:productsID", (req, res) => {
   console.log(">>>>>>> ", req.params)
   knex('order_list')
       .insert(
-        {products_id: Number(req.params.productsID), client_id: 3}
+        {products_id: Number(req.params.productsID), client_id: req.session.client_id}
       )
-      .asCallback(function(err,client) {
+      .asCallback(function(err,order_list) {
 
         if (err) {
            return console.error('ERROR', err);
         }
-
-        // knex.destroy();
-        console.log("inserted orderlist");
-        //redirect to "/menu"
         res.redirect("/menu");
-      })
-});
+       })
+    })
 
 //Order page - client view
 app.get("/myorder", (req, res) => {
@@ -163,13 +167,13 @@ app.get("/myorder", (req, res) => {
     .where({users_id: 1})
     .asCallback(function(err,order_list){
       if (err) return console.error(err);
-      knex.destroy();
+
       let templateVars = {
         order_list:order_list,
       }
-      console.log("orderlist", templateVars);
+      console.log("orderlist", templateVars);*/
       res.render("myorder", templateVars);
-    })*/
+/*    })*/
 });
 
 //Order page - restaurant view
