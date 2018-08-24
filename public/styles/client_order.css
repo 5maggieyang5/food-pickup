@@ -1,0 +1,17 @@
+#placeOrder {
+      margin: 0em 0em 5em 0em;
+    padding: 15px;
+}
+
+#orderdetail {
+  margin: 5em 5em 5em 12em
+}
+
+#creditCard {
+  margin-top: 5px;
+}
+
+#cash:focus {
+  color: white;
+  background-color: #007bff;
+}
