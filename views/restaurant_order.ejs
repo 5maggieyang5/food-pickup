@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Bootstrap 4</title>
+    <link rel="stylesheet" type="text/css" href="./styles/restaurant_order.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- <% include partials/_header %> -->
+  </head>
+  <body>
+    <h1 class="head">Restaurant Order Lists</h1>
+    <mian class="container">
+    <section class="orderSheet">
+      <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        OderNumber 1: Order Details
+        </button>
+      </p>
+      <div class="collapse" id="collapseExample">
+        <!-- <div class="card card-body"> -->
+        <div class="card-body">
+          <h5 class="card-title">Order Details</h5>
+          <p class="card-text">Customer Name</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">item 1</li>
+          <li class="list-group-item">item 2</li>
+          <li class="list-group-item">item 3</li>
+          <li class="list-group-item">item 4</li>
+        </ul>
+        <div class="card-body">
+          <label for="exampleInputPassword1">Time to Complete</label>
+          <input  class="form-control" id="time" placeholder="Time needed">
+          <button id="send" type="submit" class="btn btn-primary">Send</button>
+          <button id="complete" type="submit" class="btn btn-primary">Complete</button>
+        </div>
+      </div>
+    </section>
+    <main>
+    </body>
+  </html>
