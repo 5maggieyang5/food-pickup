@@ -12,11 +12,12 @@
       <% for (let product of products) { %>
         <% if (product.cat_id === 1) { %>
                 <form method="post" action="/add/<%= product.id%>">
-                <li> <%= product.name %> </li>
-                <p>Price: CAN$ <%= product.price%></p>
-                <label>Quantity: </label>
-                <input type="text" name="quantity" placeholder="quantity">
-                <button type="submit">Add to my order list!</button>
+                  <li> <%= product.name %> </li>
+                  <p>Price: CAN$ <%= product.price%></p>
+                  <label>Quantity: </label>
+                  <input type="text" name="quantity" placeholder="quantity">
+                  <button type="submit">Add to my order list!</button>
+                </form>
         <% } %>
       <% } %>
     </ul>
@@ -26,11 +27,12 @@
       <% for (let product of products) { %>
         <% if (product.cat_id === 2) { %>
                 <form method="post" action="/add/<%= product.id%>">
-                <li> <%= product.name %> </li>
-                <p>Price: CAN$ <%= product.price%></p>
-                <label>Quantity: </label>
-                <input type="text" name="quantity" placeholder="quantity">
-                <button type="submit">Add to my order list!</button>
+                  <li> <%= product.name %> </li>
+                  <p>Price: CAN$ <%= product.price%></p>
+                  <label>Quantity: </label>
+                  <input type="text" name="quantity" placeholder="quantity">
+                  <button type="submit">Add to my order list!</button>
+                </form>
         <% } %>
       <% } %>
     </ul>
@@ -40,11 +42,12 @@
       <% for (let product of products) { %>
         <% if (product.cat_id === 3) { %>
                 <form method="post" action="/add/<%= product.id%>">
-                <li> <%= product.name %> </li>
-                <p>Price: CAN$ <%= product.price%></p>
-                <label>Quantity: </label>
-                <input type="text" name="quantity" placeholder="quantity">
-                <button type="submit">Add to my order list!</button>
+                  <li> <%= product.name %> </li>
+                  <p>Price: CAN$ <%= product.price%></p>
+                  <label>Quantity: </label>
+                  <input type="text" name="quantity" placeholder="quantity">
+                  <button type="submit">Add to my order list!</button>
+                </form>
         <% } %>
       <% } %>
     </ul>

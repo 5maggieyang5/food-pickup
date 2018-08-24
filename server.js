@@ -22,6 +22,7 @@ const usersRoutes = require("./routes/users");
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
+
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
@@ -33,91 +34,17 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
-
-
-/*--------------------- functions -----------------------*/
-
-
-/*----------------------Fake Database--------------------*/
-
-/*const client = [
-  {
-    id: 1,
-    name: "client1",
-    phone: "647-000-0000"
-  },
-  {
-    id: 2,
-    name: "client2",
-    phone: "647-111-111"
-  }
-]
-
-const products = [
-  {
-    id: 1,
-    name: "Coke",
-    description: "Refreshingly cold!",
-    quantity: 0,
-    item_price: 3,
-    categories_id: 3
-  },
-  {
-    id: 2,
-    name: "Big Mister",
-    description: "The signature burger of MrDonald",
-    quantity: 0,
-    item_price: 7,
-    categories_id: 1
-  },
-  {
-    id: 3,
-    name: "Boring Fries",
-    description: "Crispy, fried potato strips",
-    quantity: 0,
-    item_price: 5,
-    categories_id: 2
-  }
-];
-
-const categories = [
-  {
-    id: 1,
-    name: "main"
-  },
-  {
-    id: 2,
-    name: "side"
-  },
-  {
-    id: 3,
-    name: "drink"
-  }
-]
-
-const orderList = [
-  {
-    id: 1,
-    productID: 1,
-    userID: 1
-  },
-  {
-    id: 2,
-    productID: 2,
-    userID: 2
-  }
-];*/
-// Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
-
-/*----------------------My Routes--------------------*/
 
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.use(express.static("public"));
+
+// Mount all resource routes
+app.use("/api/users", usersRoutes(knex));
+/*----------------------My Routes--------------------*/
 
 //Menu page
 app.get("/menu", (req, res) => {
@@ -125,22 +52,41 @@ app.get("/menu", (req, res) => {
     .select('*')
     .asCallback(function(err,products){
       if (err) return console.error(err);
-
       knex.destroy();
+
       knex('order_list')
         .select("*")
-        .where({users_id: 1})
+        .where({client_id: 1})
         .asCallback(function(err, order_list) {
           let templateVars = {
             products: products,
-            order_list:order_list,
+            order_list:order_list
           }
           console.log("menu product & orderlist", templateVars);
           res.render("menu", templateVars);
         })
-
     })
 });
+
+/*
+knex('products')
+  .select('*')
+  .then(products =>{
+    knex.select('*').from('order_list')
+    .where({users_id: 1})
+    .then(orderList => {
+      let templateVars = {
+        products,
+        orderList
+      }
+      console.log()
+      res.render()
+    })
+    .catch(console.error("Error after selecting from order_list", err))
+  })
+  .catch(console.error(err))
+
+*/
 
 app.post("/menu", (req, res) => {
 
@@ -168,31 +114,64 @@ app.get("/register", (req, res) => {
 
 app.post("/register", (req, res) => {
   const {user_name, password, phone} = req.body;
+  console.log("body: ", req.body)
   if (user_name && password && phone) {
-    console.log(client);
-    client.client1 = {
-      id: "user1",
-      name: user_name,
-      phone: phone
-    };
-    console.log(client);
-    res.redirect("/");
+    knex('client')
+      .insert(
+        {name: user_name, phone: phone}
+      )
+      .asCallback(function(err,client) {
+
+        if (err) {
+           return console.error('ERROR', err);
+        }
+
+        // console.log("client: ", client);
+        knex.destroy();
+        res.redirect("/");
+      })
   } else {
     res.send("sorry, please provide all the infor.");
   }
 });
 
-app.post("/add/:productID", (req, res) => {
+app.post("/add/:productsID", (req, res) => {
   //add item into order db;
+  console.log("come to insert order");
+  console.log(">>>>>>> ", req.params)
+  knex('order_list')
+      .insert(
+        {products_id: Number(req.params.productsID), client_id: 3}
+      )
+      .asCallback(function(err,client) {
 
-  //redirect to "/menu"
-  res.redirect("/menu");
-})
+        if (err) {
+           return console.error('ERROR', err);
+        }
+
+        // knex.destroy();
+        console.log("inserted orderlist");
+        //redirect to "/menu"
+        res.redirect("/menu");
+      })
+});
 
 //Order page - client view
 app.get("/myorder", (req, res) => {
-  res.render("myorder");
+/*  knex('order_list')
+    .select('*')
+    .where({users_id: 1})
+    .asCallback(function(err,order_list){
+      if (err) return console.error(err);
+      knex.destroy();
+      let templateVars = {
+        order_list:order_list,
+      }
+      console.log("orderlist", templateVars);
+      res.render("myorder", templateVars);
+    })*/
 });
+
 //Order page - restaurant view
 app.get("/clientorder", (req, res) => {
   res.render("clientorder");
