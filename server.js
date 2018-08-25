@@ -177,6 +177,10 @@ app.get("/myorder", (req, res) => {
    })
 });
 
+app.post("/myorder", (req, res) => {
+  console.log('hello')
+})
+
 //Order page - restaurant view
 app.get("/clientorder", (req, res) => {
   res.render("clientorder");
