@@ -8,13 +8,13 @@ $(() => {
     }
   });;*/
 
-  $("form").on("click", function(){
+  //$("form").on("click", function(){
     // ajax request
     // send the product id and quantity
     // then  show that the item has been added
-  });
+  //});
 
-  $("button").on("click", function(event){
+  $(".btn__add").on("click", function(event){
     console.log("this is event", event);
     let name = $(this).parent(".card-body").data("name");
     console.log(name);
@@ -33,7 +33,20 @@ $(() => {
       $ul.append($quantityli);
       $("#orderList_container").append($ul);
     }
+  });
 
-  })
+
+$("#placeOrder").on("click", function(event){
+ event.preventDefault(event);
+
+$.ajax('/myorder', {
+  type: "POST",
+  data: {id:'myusername'}
+}).then((response)=>{});
+
+
 });
 
+
+
+});

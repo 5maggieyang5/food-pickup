@@ -52,7 +52,10 @@ app.use("/api/users", usersRoutes(knex));
 /*----------------------My Routes--------------------*/
 
 //Menu page
+
 app.get("/menu", (req, res) => {
+  console.log('/menu');
+
   // selects all columns from products table
   knex('products')
     .select('*')
@@ -67,11 +70,12 @@ app.get("/menu", (req, res) => {
             products: products,
             order_list:orderlist
           }
-          console.log("menu product & orderlist", templateVars);
+          //console.log("menu product & orderlist", templateVars);
           res.render("menu", templateVars);
         })
     })
 });
+
 /*
 
 knex('products')
@@ -178,7 +182,7 @@ app.get("/myorder", (req, res) => {
 });
 
 app.post("/myorder", (req, res) => {
-  console.log('hello')
+  console.log('hello');
 })
 
 //Order page - restaurant view
