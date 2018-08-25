@@ -41,6 +41,9 @@ div #menuitems {
   width: 500px;
 }
 
+li {
+  width: 500px;
+}
 
 /*#side {
   float: right;

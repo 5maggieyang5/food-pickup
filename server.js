@@ -51,73 +51,6 @@ app.use(express.static("public"));
 app.use("/api/users", usersRoutes(knex));
 /*----------------------My Routes--------------------*/
 
-//Menu page
-
-app.get("/menu", (req, res) => {
-  console.log('/menu');
-
-  // selects all columns from products table
-  knex('products')
-    .select('*')
-    .asCallback(function(err,products){
-      if (err) return console.error(err);
-      // selects all columns from order_list table where client_id = client_id inside a cookie
-      knex('order_list')
-        .select("*")
-        .where({client_id: req.session.client_id})
-        .asCallback(function(err, orderlist) {
-          let templateVars = {
-            products: products,
-            order_list:orderlist
-          }
-          //console.log("menu product & orderlist", templateVars);
-          res.render("menu", templateVars);
-        })
-    })
-});
-
-/*
-
-knex('products')
-  .select('*')
-  .then(products =>{
-    knex.select('*').from('order_list')
-    .where({users_id: 1})
-    .then(orderList => {
-      let templateVars = {
-        products,
-        orderList
-      }
-      console.log()
-      res.render()
-    })
-    .catch(console.error("Error after selecting from order_list", err))
-  })
-  .catch(console.error(err))*/
-
-
-app.post("/menu", (req, res) => {
-
-});
-
-//Login page
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.post("/login", (req, res) => {
-  // grabs user name and pass from whatever user entered
-  const {user_name, password} = req.body;
-  if (user_name  && password) {
-    req.session.user_id = client_id;
-   res.redirect("/");
-  } else {
-    res.send("sorry, please provide all the infor.");
-  }
-});
-
-
-
 //Register page
 app.get("/register", (req, res) => {
   res.render("register");
@@ -148,10 +81,79 @@ app.post("/register", (req, res) => {
   }
 });
 
-/*app.post("/add/:productsID", (req, res) => {
+//Login page
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
+app.post("/login", (req, res) => {
+  // grabs user name and pass from whatever user entered
+  const {user_name, password} = req.body;
+  if (user_name  && password) {
+    req.session.user_id = client_id;
+   res.redirect("/");
+  } else {
+    res.send("sorry, please provide all the infor.");
+  }
+});
+
+
+
+
+
+//Menu page
+app.get("/menu", (req, res) => {
+  // selects all columns from products table
+  knex('products')
+    .select('*')
+    .asCallback(function(err,products){
+      if (err) return console.error(err);
+      // selects all columns from order_list table where client_id = client_id inside a cookie
+      /*knex('order_list')
+        .select("*")
+        .where({client_id: req.session.client_id})
+        .asCallback(function(err, orderlist) {*/
+
+          let templateVars = {
+            products: products,
+          }
+          res.render("menu", templateVars);
+        })
+  //  })
+});
+/*
+
+knex('products')
+  .select('*')
+  .then(products =>{
+    knex.select('*').from('order_list')
+    .where({users_id: 1})
+    .then(orderList => {
+      let templateVars = {
+        products,
+        orderList
+      }
+      console.log()
+      res.render()
+    })
+    .catch(console.error("Error after selecting from order_list", err))
+  })
+  .catch(console.error(err))*/
+
+
+app.post("/menu", (req, res) => {
+
+});
+
+
+
+/*app.post("/add/:productsID", (req, res) => {
   console.log("come to insert order");
   console.log(">>>>>>> ", req.params)
+  let order_list = {}
+  order_list['products_id'] = req.params.productsID;
+  order_list['client_id'] = req.session.client_id;
+  console.log(order_list)
   knex('order_list')
       .insert(
         {products_id: Number(req.params.productsID), client_id: req.session.client_id}
@@ -159,31 +161,42 @@ app.post("/register", (req, res) => {
       .asCallback(function(err,order_list) {
 
         if (err) {
-           return console.error('ERROR', err);
+          return console.error('ERROR', err);
         }
-        res.redirect("/menu");
-       })
-    })*/
+  })
+})*/
 
 //Order page - client view
 app.get("/myorder", (req, res) => {
  knex('order_list')
     .select('*')
-    .where({users_id: 1})
-    .asCallback(function(err,order_list){
+    .where( {client_id: 1} )
+    .returning('*')
+    .asCallback(function(err, rows){
       if (err) return console.error(err);
-
       let templateVars = {
-        order_list:order_list,
+        order_list: rows
       }
-      console.log("orderlist", templateVars);
       res.render("myorder", templateVars);
    })
 });
 
 app.post("/myorder", (req, res) => {
-  console.log('hello');
+  let orderlist = req.body.orderlist;
+  for (let orders of orderlist){
+    //columns['name'] === orders['fooditem']
+    knex('order_list')
+    .insert({ name: orders['fooditem'], price: orders['price'], quantity: orders['quantity'], client_id: 1})
+    .returning('*')
+    .asCallback(function(err, rows){
+      if (err) return console.error(err);
+    })
+  }
+  res.redirect("myorder")
 })
+
+
+
 
 //Order page - restaurant view
 app.get("/clientorder", (req, res) => {
