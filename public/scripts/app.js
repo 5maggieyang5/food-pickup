@@ -18,12 +18,9 @@ $(() => {
   $(".add").on("click", function(event){
     event.preventDefault(event);
     let name = $(this).parent(".card-body").data("name");
-    console.log(name);
     let quantity = $(this).siblings(".form-control").val();
-    console.log(quantity);
     let price = $(this).parent(".card-body").data("price")
         price = price * quantity
-    console.log(price);
     let $ul = $("<ul>");//.addClass("list-group list-group-flush");
     let $nameli = $("<li>").data("name", name).text(name); //.addClass("list-group-item")
     let $priceli = $("<li>").data("price", price).text(price); //.addClass("list-group-item")
@@ -40,6 +37,20 @@ $(() => {
       })
     }
     console.log(orderlist)
+    console.log(price);
+
+
+    const totalPrice = function (orderlist){
+      let itemPrice = 0;
+      for (let order of orderlist){
+        itemPrice += order.price;
+      }
+      return itemPrice;
+    }
+    console.log(totalPrice(orderlist));
+
+    $("#total_price").text("Total Price: $ " + totalPrice(orderlist));
+
   });
 
 

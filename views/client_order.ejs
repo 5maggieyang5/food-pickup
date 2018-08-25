@@ -28,17 +28,28 @@
           <h5 class="card-title">Order Deatails</h5>
           <p class="card-text">Customer Name</p>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">item 1
-          </li>
-          <li class="list-group-item">item 2
-          </li>
-          <li class="list-group-item">item 3
-          </li>
-          <li class="list-group-item">Total price: $
-          </li>
-        </ul>
 
+
+
+
+
+
+
+<% let price = 0 %>
+    <% for(let order of order_list) { %>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= order.name %>
+            </li>
+            <li class="list-group-item"><%= order.quantity %>
+            </li>
+            <li class="list-group-item"><%= order.price %>
+            </li>
+
+            <% price += Number(order.price) %>
+    <% } %>
+            <li class="list-group-item">Total price: $ <span><%= price.toFixed(2) %></span>
+            </li>
+        </ul>
 
 
         <div class="card-body">

@@ -90,7 +90,6 @@ app.post("/login", (req, res) => {
   // grabs user name and pass from whatever user entered
   const {user_name, password} = req.body;
   if (user_name  && password) {
-    req.session.user_id = client_id;
    res.redirect("/");
   } else {
     res.send("sorry, please provide all the infor.");
@@ -172,12 +171,13 @@ app.get("/myorder", (req, res) => {
     .select('*')
     .where( {client_id: 1} )
     .returning('*')
-    .asCallback(function(err, rows){
+    .asCallback(function(err, order_list){
       if (err) return console.error(err);
       let templateVars = {
-        order_list: rows
+        order_list: order_list
       }
-      res.render("myorder", templateVars);
+      console.log("orderlist: ", order_list);
+      res.render("client_order", templateVars);
    })
 });
 
@@ -192,16 +192,10 @@ app.post("/myorder", (req, res) => {
       if (err) return console.error(err);
     })
   }
-  res.redirect("myorder")
+  res.redirect("client_order")
 })
 
 
-
-
-//Order page - restaurant view
-app.get("/clientorder", (req, res) => {
-  res.render("clientorder");
-});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

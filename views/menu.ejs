@@ -22,7 +22,7 @@
           <div class="card-body" data-name="<%=product.name%>" data-price="<%= product.price%>">
             <h5 class="card-title"><%= product.name %></h5>
             <p class="card-text"><%= product.description %></p>
-            <p class="card-text"><small class="text-muted">Price: CAN$ <%= product.price%></small></p>
+            <p id="product_price" class="card-text"><small class="text-muted">Price: CAN$ <%= product.price%></small></p>
             <label>Quantity: </label>
             <input  class="form-control" placeholder="Amount" name="quantity" type="text">
             <form class="add" method="POST" action="/menu">
@@ -43,7 +43,11 @@
             <div>
               <div id="orderList_container">
               </div>
-              <li class="list-group-item">Total Price: $ </li>
+
+              <div id="total_price">
+
+              </div>
+
             <button class="delete-btn"> delete </button></li>
               <div class="card-body">
               <form action="/myorder" method="GET">
