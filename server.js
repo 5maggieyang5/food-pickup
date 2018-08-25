@@ -107,63 +107,17 @@ app.get("/menu", (req, res) => {
     .select('*')
     .asCallback(function(err,products){
       if (err) return console.error(err);
-      // selects all columns from order_list table where client_id = client_id inside a cookie
-      /*knex('order_list')
-        .select("*")
-        .where({client_id: req.session.client_id})
-        .asCallback(function(err, orderlist) {*/
-
-          let templateVars = {
-            products: products,
-          }
-          res.render("menu", templateVars);
-        })
-  //  })
-});
-/*
-
-knex('products')
-  .select('*')
-  .then(products =>{
-    knex.select('*').from('order_list')
-    .where({users_id: 1})
-    .then(orderList => {
       let templateVars = {
-        products,
-        orderList
+        products: products,
       }
-      console.log()
-      res.render()
-    })
-    .catch(console.error("Error after selecting from order_list", err))
-  })
-  .catch(console.error(err))*/
+        res.render("menu", templateVars);
+      })
+});
 
 
 app.post("/menu", (req, res) => {
 
 });
-
-
-
-/*app.post("/add/:productsID", (req, res) => {
-  console.log("come to insert order");
-  console.log(">>>>>>> ", req.params)
-  let order_list = {}
-  order_list['products_id'] = req.params.productsID;
-  order_list['client_id'] = req.session.client_id;
-  console.log(order_list)
-  knex('order_list')
-      .insert(
-        {products_id: Number(req.params.productsID), client_id: req.session.client_id}
-      )
-      .asCallback(function(err,order_list) {
-
-        if (err) {
-          return console.error('ERROR', err);
-        }
-  })
-})*/
 
 //Order page - client view
 app.get("/myorder", (req, res) => {
@@ -176,15 +130,17 @@ app.get("/myorder", (req, res) => {
       let templateVars = {
         order_list: order_list
       }
+
       console.log("orderlist: ", order_list);
+
       res.render("client_order", templateVars);
    })
 });
 
 app.post("/myorder", (req, res) => {
   let orderlist = req.body.orderlist;
+  //inserts orders into orderlist database
   for (let orders of orderlist){
-    //columns['name'] === orders['fooditem']
     knex('order_list')
     .insert({ name: orders['fooditem'], price: orders['price'], quantity: orders['quantity'], client_id: 1})
     .returning('*')
@@ -194,8 +150,6 @@ app.post("/myorder", (req, res) => {
   }
   res.redirect("client_order")
 })
-
-
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
