@@ -21,7 +21,8 @@
 }
 
 .foodpic {
-  margin-left: 5em;
+  width: 350px;
+  padding-right: 2em;
 }
 
 .mainFood {
@@ -66,3 +67,7 @@ li {
 /*#side {
   float: right;
 }*/
+
+.card-body {
+  padding: 0 20px;
+}
