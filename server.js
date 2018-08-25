@@ -144,8 +144,8 @@ app.post("/register", (req, res) => {
   }
 });
 
-app.post("/add/:productsID", (req, res) => {
-  //add item into order db;
+/*app.post("/add/:productsID", (req, res) => {
+
   console.log("come to insert order");
   console.log(">>>>>>> ", req.params)
   knex('order_list')
@@ -159,7 +159,7 @@ app.post("/add/:productsID", (req, res) => {
         }
         res.redirect("/menu");
        })
-    })
+    })*/
 
 //Order page - client view
 app.get("/myorder", (req, res) => {
