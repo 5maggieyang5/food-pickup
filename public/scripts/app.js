@@ -22,9 +22,9 @@ $(() => {
     let price = $(this).parent(".card-body").data("price")
         price = price * quantity
     let $ul = $("<ul>");//.addClass("list-group list-group-flush");
-    let $nameli = $("<li>").data("name", name).text(name); //.addClass("list-group-item")
-    let $priceli = $("<li>").data("price", price).text(price); //.addClass("list-group-item")
-    let $quantityli = $("<li>").data("quantity", quantity).text(quantity); //.addClass("list-group-item")
+    let $nameli = $("<div>").data("name", name).text(`- ${name}`); //.addClass("list-group-item")
+    let $priceli = $("<div>").data("price", price).text(`$ ${price}`); //.addClass("list-group-item")
+    let $quantityli = $("<div>").data("quantity", quantity).text(`Amount: ${quantity}`); //.addClass("list-group-item")
     if (quantity){
       $ul.append($nameli);
       $ul.append($priceli);
@@ -61,6 +61,7 @@ $("#placeOrder").on("click", function(event){
   })
   .then((response)=>{});
 });
+
 
 
 

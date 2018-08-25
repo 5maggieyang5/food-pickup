@@ -22,7 +22,7 @@
 
 .foodpic {
   width: 350px;
-  padding-right: 2em;
+  padding-right: 3em;
 }
 
 .mainFood {
@@ -33,7 +33,18 @@
 #orderdetail {
       position: fixed;
     /*text-align: center;*/
-    width: 60%;
+    top: 10%;
+/*    width: 60%;*/
+    width: 300px;
+    height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   text-align: center;
+   padding: 3em;
+   height:auto;
+}
+
+#orderwords {
+  text-align: center;
 }
 
 div #menuitems {
@@ -70,4 +81,9 @@ li {
 
 .card-body {
   padding: 0 20px;
+}
+
+#main {
+  float: left;
+  padding-left: 70px;
 }
