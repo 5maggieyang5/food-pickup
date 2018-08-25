@@ -3,6 +3,7 @@
 require('dotenv').config();
 
 const PORT          = process.env.PORT || 8080;
+
 const ENV           = process.env.ENV || "development";
 const express       = require("express");
 const bodyParser    = require("body-parser");
@@ -61,18 +62,18 @@ app.get("/menu", (req, res) => {
       knex('order_list')
         .select("*")
         .where({client_id: req.session.client_id})
-        .asCallback(function(err, order_list) {
+        .asCallback(function(err, orderlist) {
           let templateVars = {
             products: products,
-            order_list:order_list
+            order_list:orderlist
           }
           console.log("menu product & orderlist", templateVars);
           res.render("menu", templateVars);
         })
     })
 });
-
 /*
+
 knex('products')
   .select('*')
   .then(products =>{
@@ -88,9 +89,8 @@ knex('products')
     })
     .catch(console.error("Error after selecting from order_list", err))
   })
-  .catch(console.error(err))
+  .catch(console.error(err))*/
 
-*/
 
 app.post("/menu", (req, res) => {
 
@@ -105,12 +105,13 @@ app.post("/login", (req, res) => {
   // grabs user name and pass from whatever user entered
   const {user_name, password} = req.body;
   if (user_name  && password) {
-/*    req.session.user_id = client_id;*/
-    res.redirect("/");
+    req.session.user_id = client_id;
+   res.redirect("/");
   } else {
     res.send("sorry, please provide all the infor.");
   }
 });
+
 
 
 //Register page
@@ -135,8 +136,8 @@ app.post("/register", (req, res) => {
         }
         // CHECK WITH MENTOR
         req.session.client_id = client[0].id;
-        console.log(req.session.client_id)
-        res.redirect("/");
+              console.log(req.session.client_id)
+              res.redirect("/");
       })
   } else {
     res.send("sorry, please provide all the infor.");
@@ -162,7 +163,7 @@ app.post("/add/:productsID", (req, res) => {
 
 //Order page - client view
 app.get("/myorder", (req, res) => {
-/*  knex('order_list')
+ knex('order_list')
     .select('*')
     .where({users_id: 1})
     .asCallback(function(err,order_list){
@@ -171,9 +172,9 @@ app.get("/myorder", (req, res) => {
       let templateVars = {
         order_list:order_list,
       }
-      console.log("orderlist", templateVars);*/
+      console.log("orderlist", templateVars);
       res.render("myorder", templateVars);
-/*    })*/
+   })
 });
 
 //Order page - restaurant view

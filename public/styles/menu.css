@@ -1,0 +1,47 @@
+.dropdown {
+
+    margin: 10em 5em 5em 12em;}
+
+.delete-btn {
+  float: right;
+}
+
+#add {
+
+  margin-top: 5px;
+}
+
+#orderdetail {
+
+margin-top: 200px;
+}
+
+#catogary {
+  margin:2em 2em 2em 1em;
+}
+
+.side {
+  /*margin-top: -1.5em;*/
+ height: 1em;
+}
+
+.mainFood {
+   /*margin-top: -1.5em;*/
+ height: 1em;
+}
+
+#orderdetail {
+      position: fixed;
+    /*text-align: center;*/
+    width: 60%;
+}
+
+div #menuitems {
+  height:200px;
+  width: 500px;
+}
+
+
+/*#side {
+  float: right;
+}*/
