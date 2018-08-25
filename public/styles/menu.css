@@ -7,22 +7,21 @@
 }
 
 #add {
-
   margin-top: 5px;
 }
 
-#orderdetail {
-
-margin-top: 200px;
-}
-
-#catogary {
-  margin:2em 2em 2em 1em;
+#category {
+  flex-grow: 0;
+  margin: 1em 1em 1em 2em;
 }
 
 .side {
   /*margin-top: -1.5em;*/
  height: 1em;
+}
+
+.foodpic {
+  margin-left: 5em;
 }
 
 .mainFood {
@@ -41,8 +40,27 @@ div #menuitems {
   width: 500px;
 }
 
-li {
+div .card {
+  height:auto;
   width: 500px;
+}
+
+div .col {
+  flex-grow: 0;
+}
+
+#cart{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 250px;
+  width: 400px;
+  padding-bottom: 55em;
+}
+
+li {
+  margin-right: 0;
+  width: 250px;
 }
 
 /*#side {
