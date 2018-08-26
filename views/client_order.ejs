@@ -12,54 +12,55 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
-
-
   <body>
 
 
-    <section id="orderdetail" class="row">
+  <div class="column">
+    <div class="container">
+      <div id="orderdetail" class="row">
 
+        <div id="orderTable" class="col-md-5 col-sm-12">
+          <div class="card-body">
+            <h2 class="card-title">Order Details: </h2>
+            <p class="card-text">Customer Name</p>
+          </div>
 
-      <div class="col">
-        <div class="card-body">
-          <h5 class="card-title">Order Details</h5>
-          <p class="card-text">Customer Name</p>
-        </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% let price = 0 %>
+            <% for(let order of order_list) { %>
+              <tr>
+                <td><%= order.name %></td>
+                <td><%= order.quantity %></td>
+                <td>$ <%= order.price %></td>
+              </tr>
+              <% price += Number(order.price) %>
+            <% } %>
+            </tbody>
+          </table>
+      </div>
+ <!--  -->
+      <div class="col-md-2 col-sm-12"></div>
 
-
-
-
-
-
-
-<% let price = 0 %>
-    <% for(let order of order_list) { %>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><%= order.name %>
-            </li>
-            <li class="list-group-item"><%= order.quantity %>
-            </li>
-            <li class="list-group-item"><%= order.price %>
-            </li>
-
-            <% price += Number(order.price) %>
-    <% } %>
-            <li class="list-group-item">Total price: $ <span><%= price.toFixed(2) %></span>
-            </li>
-        </ul>
-
-
-        <div class="card-body">
-          <p> Pay By: </p>
-          <button id="cash" type="button" class="btn btn-outline-primary">Cash</button>
-
-
-
-          <p>
+        <div class="col-md-5 col-sm-12">
+          <div class="card-body">
+            <h2>Total price: </h2>
+            <li class="list-group-item">$ <span><%= price.toFixed(2) %></span></li>
+          <h5 id="payBy"> Pay By: </h5>
+          <div>
+            <button id="cash" type="button" class="btn btn-outline-primary">Cash</button>
             <button id="creditCard" class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Credit Card
+              Credit Card
             </button>
-          </p>
+          </div>
+
           <div class="collapse" id="collapseExample">
             <!-- <div class="card card-body"> -->
             <form>
@@ -78,12 +79,12 @@
                 <input  class="form-control" placeholder="MM/YY">
               </div>
               <div class="form-row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                   <label for="inputAddress2">Security code</label>
                   <input type="text" class="form-control" placeholder="XXX">
                 </div>
-                <div class="form-group col-md-2">
-                  <label for="inputZip">Zip/Postal code</label>
+                <div class="form-group col-md-4">
+                  <label id="psLabel" for="inputZip">Zip/Postal code</label>
                   <input type="text" class="form-control" id="inputZip">
                 </div>
               </div>
@@ -91,14 +92,31 @@
           </div>
         </div>
 
-
-
         <div class="card-body">
-          <input id="order" class="btn btn-primary" type="submit" value="Order!">
+          <input id="order" class="btn btn-primary" type="submit" value="Order Now!">
         </div>
 
+        <div id="order-success"></div>
 
-      </section>
+      </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,24 +12,297 @@
   </head>
 
   <body>
-  <h1>
-    Owner View
-  </h1>
-      <textarea id="inputtime" type="text"></textarea>
-      <input id="updatetime" class="btn btn-primary" type="submit" value="Update Time">
-    <input id="completeorder" class="btn btn-primary" type="submit" value="Complete">
+
+   <h1 class="head">Restaurant Order Lists</h1>
+    <main class="container">
+    <section class="orderSheet">
+
+         <div class="column">
+          <div class="container">
+            <div class="row">
+              <div id="orderTable" class="col-md-4">
+
+                <p>
+                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    OrderNumber 6: Order Details
+                  </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                  <div class="card-body">
+                    <h2 class="card-title"> </h2>
+                    <p class="card-text">Customer Ordered: </p>
+                    <p>(Paid by Credit Card)</p>
+                  </div>
+
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% let price = 0 %>
+                    <% for(let order of order_list) { %>
+                      <tr>
+                        <td><%= order.name %></td>
+                        <td><%= order.quantity %></td>
+                        <td>$ <%= order.price %></td>
+                      </tr>
+                      <% price += Number(order.price) %>
+                    <% } %>
+                    </tbody>
+                  </table>
+
+                  <div class="card-body" id="disappear">
+                    <label for="exampleInputPassword1">Time to Complete</label>
+                    <textarea id="inputtime" type="text" placeholder="Time needed"></textarea>
+                    <input id="updatetime" class="btn btn-secondary" type="submit" value="Update Time">
+                    <input id="completeorder" class="btn btn-secondary" type="submit" value="Complete">
+                  </div>
+              </div>
 
 
+              <p>
+                  <button class="btn btn-primary" type="button" id="btn1">
+                    OrderNumber 5: Order Details
+                  </button>
+                </p>
+                <div class="collapse" id="show1">
+                <div class="card-body">
+                  <h2 class="card-title"> </h2>
+                  <p class="card-text">Customer Addison Ordered: </p>
+                  <p>(Pay by cash when pickup)</p>
+                </div>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Big Mister</td>
+                      <td>1</td>
+                      <td>$ 6.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>Coke</td>
+                      <td>1</td>
+                      <td>$ 1.99</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="card-body">
+                  <input id="completeorder" class="btn btn-success" type="submit" value="This order Completed!">
+                </div>
+              </div>
 
 
+              <p>
+                  <button class="btn btn-primary" type="button" id="btn2">
+                    OrderNumber 4: Order Details
+                  </button>
+                </p>
+                <div class="collapse" id="show2">
+                <div class="card-body">
+                  <h2 class="card-title"> </h2>
+                  <p class="card-text">Customer Alfred Ordered: </p>
+                  <p>(Pay by cash when pickup)</p>
+                </div>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Boring Onion Rings</td>
+                      <td>2</td>
+                      <td>$ 3.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>Diet Coke</td>
+                      <td>1</td>
+                      <td>$ 1.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>Triple Mister</td>
+                      <td>1</td>
+                      <td>$ 8.99</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+                <div class="card-body">
+                  <input id="completeorder" class="btn btn-success" type="submit" value="This order Completed!">
+                </div>
+              </div>
+
+                <p>
+                  <button class="btn btn-primary" type="button" id="btn3">
+                    OrderNumber 3: Order Details
+                  </button>
+                </p>
+                <div class="collapse" id="show3">
+                <div class="card-body">
+                  <h2 class="card-title"> </h2>
+                  <p class="card-text">Customer Bill Ordered: </p>
+                  <p>(Paid by Credit Card)</p>
+                </div>
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>MrAngus</td>
+                      <td>1</td>
+                      <td>$ 9.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>MrFish</td>
+                      <td>1</td>
+                      <td>$ 7.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>Fancy Onion Rings</td>
+                      <td>1</td>
+                      <td>$ 6.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>Sprite</td>
+                      <td>2</td>
+                      <td>$ 3.99</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="card-body">
+                  <input id="completeorder" class="btn btn-success" type="submit" value="This order Completed!">
+                </div>
+              </div>
 
 
+                <p>
+                  <button class="btn btn-primary" type="button" id="btn4">
+                    OrderNumber 2: Order Details
+                  </button>
+                </p>
+                <div class="collapse" id="show4">
+                <div class="card-body">
+                  <h2 class="card-title"> </h2>
+                  <p class="card-text">Customer Bill Ordered: </p>
+                  <p>(Paid by Credit Card)</p>
+                </div>
 
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>MrMister</td>
+                      <td>2</td>
+                      <td>$ 19.99</td>
+                    </tr>
 
+                    <tr>
+                      <td>Boring Fries</td>
+                      <td>1</td>
+                      <td>$ 2.99</td>
+                    </tr>
 
+                    <tr>
+                      <td>Root Beer</td>
+                      <td>2</td>
+                      <td>$ 3.98</td>
+                    </tr>
+                  </tbody>
+                </table>
 
+                <div class="card-body">
+                  <input id="completeorder" class="btn btn-success" type="submit" value="This order Completed!">
+                </div>
+              </div>
 
+              <p>
+                  <button class="btn btn-primary" type="button" id="btn5">
+                    OrderNumber 1: Order Details
+                  </button>
+                </p>
+                <div class="collapse" id="show5">
+                <div class="card-body">
+                  <h2 class="card-title"> </h2>
+                  <p class="card-text">Customer Bill Ordered: </p>
+                  <p>(Paid by Credit Card)</p>
 
+                </div>
 
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Product</th>
+                      <th scope="col">Amount</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Sausage MrMuffin</td>
+                      <td>2</td>
+                      <td>$ 7.98</td>
+                    </tr>
+
+                    <tr>
+                      <td>Fancy Poutine</td>
+                      <td>1</td>
+                      <td>$ 8.99</td>
+                    </tr>
+
+                    <tr>
+                      <td>Coke</td>
+                      <td>2</td>
+                      <td>$ 3.98</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="card-body">
+                  <input id="completeorder" class="btn btn-success" type="submit" value="This order Completed!">
+                </div>
+              </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    <main>
   </body>
 </html>

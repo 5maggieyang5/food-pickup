@@ -69,6 +69,7 @@ $("#order").on("click", function(event){
   })
   .then((response)=>{});
    console.log('clicked')
+
 });
 
 $("#updatetime").on("click", function(event){
@@ -85,8 +86,32 @@ $("#completeorder").on("click", function(event){
     type: "POST"
   })
   .then((response)=>{});
+
+  let $completed = $("<input>").addClass("btn btn-success").val("This order Completed!");
+  $("#disappear").empty().append($completed);
 });
 
+$("#order").on("click", function(event){
+  $("#order-success").text("Order successed! Please check your text messages. MrDonald's will update the approx. finish time!").slideDown();
+})
 
+$("#btn1").on("click", function(){
+  $('#show1').slideToggle();
+})
 
+$("#btn2").on("click", function(){
+  $('#show2').slideToggle();
+})
+
+$("#btn3").on("click", function(){
+  $('#show3').slideToggle();
+})
+
+$("#btn4").on("click", function(){
+  $('#show4').slideToggle();
+})
+
+$("#btn5").on("click", function(){
+  $('#show5').slideToggle();
+})
 });
