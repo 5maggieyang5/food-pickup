@@ -72,11 +72,12 @@ $("#order").on("click", function(event){
 });
 
 $("#updatetime").on("click", function(event){
+  let content = $("textarea").val();
   $.ajax('/owner/update', {
-    type: "POST"
+    type: "POST",
+    data: {text: content}
   })
   .then((response)=>{});
-   console.log('time update')
 });
 
 $("#completeorder").on("click", function(event){
@@ -84,7 +85,6 @@ $("#completeorder").on("click", function(event){
     type: "POST"
   })
   .then((response)=>{});
-   console.log('complete order')
 });
 
 

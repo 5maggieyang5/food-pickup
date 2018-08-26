@@ -172,13 +172,16 @@ app.post("/placeorder", (req, res) => {
 app.get("/owner", (req, res) => {
   res.render("owner")
 })
+
 //twilio: sends text to customer about updating time
 app.post("/owner/update", (req, res) => {
-  console.log('button clicked')
+  let time = req.body.text;
+  console.log('this is the time', time);
+  console.log('button clicked');
   client.messages.create({
       to: "+16478362725",
       from: "+16476914595",
-      body: `Testing update`
+      body: `Your order will be ready for pickup in: ${time} minutes.`
     })
       .then(message => console.log('update message sent'))
       .then(res.sendStatus(200));
