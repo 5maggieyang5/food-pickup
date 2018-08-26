@@ -7,11 +7,23 @@
   margin: 5em 5em 5em 12em
 }
 
-#creditCard {
-  margin-top: 5px;
-}
-
 #cash:focus {
   color: white;
   background-color: #007bff;
 }
+
+#payBy {
+  padding-top: 1em;
+}
+
+#orderTable {
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  margin: auto;
+}
+
+#psLabel {
+  margin-left: 20px;
+}
+
