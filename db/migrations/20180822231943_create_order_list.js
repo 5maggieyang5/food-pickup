@@ -1,11 +1,11 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
       knex.schema.createTable('order_list', (table) => {
-        table.increments('id').primary();
-        table.integer('main_id');
-        table.integer('side_id');
-        table.integer('drinks_id');
-        table.integer('users_id');
+        table.increments().primary();
+        table.string('name');
+        table.decimal('price');
+        table.integer('quantity');
+        table.integer('client_id');
       })
     ])
 };
