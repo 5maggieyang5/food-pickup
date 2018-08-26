@@ -71,6 +71,22 @@ $("#order").on("click", function(event){
    console.log('clicked')
 });
 
+$("#updatetime").on("click", function(event){
+  $.ajax('/owner/update', {
+    type: "POST"
+  })
+  .then((response)=>{});
+   console.log('time update')
+});
+
+$("#completeorder").on("click", function(event){
+  $.ajax('/owner/complete', {
+    type: "POST"
+  })
+  .then((response)=>{});
+   console.log('complete order')
+});
+
 
 
 });

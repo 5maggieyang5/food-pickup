@@ -156,7 +156,7 @@ app.post("/myorder", (req, res) => {
 
   res.redirect("client_order")
 })
-
+//twilio: sends text to owner to check orders
 app.post("/placeorder", (req, res) => {
   console.log('button clicked, message not yet sent')
   client.messages.create({
@@ -164,7 +164,35 @@ app.post("/placeorder", (req, res) => {
       from: "+16476914595",
       body: `You have a new order! Check your order page!`
     })
-      .then(message => console.log('message was sent'));
+      .then(message => console.log('message was sent'))
+      .then(res.sendStatus(200));
+})
+
+//restaurant owner page
+app.get("/owner", (req, res) => {
+  res.render("owner")
+})
+//twilio: sends text to customer about updating time
+app.post("/owner/update", (req, res) => {
+  console.log('button clicked')
+  client.messages.create({
+      to: "+16478362725",
+      from: "+16476914595",
+      body: `Testing update`
+    })
+      .then(message => console.log('update message sent'))
+      .then(res.sendStatus(200));
+})
+//twilio: sends text to customer about order complete
+app.post("/owner/complete", (req, res) => {
+  console.log('button clicked')
+  client.messages.create({
+      to: "+16478362725",
+      from: "+16476914595",
+      body: `Your order is ready for pickup!`
+    })
+      .then(message => console.log('complete message sent'))
+      .then(res.sendStatus(200));
 })
 
 app.listen(PORT, () => {
