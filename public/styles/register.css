@@ -1,2 +1,30 @@
-.register {
-  margin: 10em 5em 5em 12em;}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    filter: blur(20px);
+}
+
+
+#registerbox {
+    opacity: 1;
+    color: #ffffff5e;
+    background-color: #3130309e;
+    margin: 15em 45em 15em 45em;
+    padding: 2em 5em 2em 5em;
+}
+
+#registerbox:hover {
+  color: #ffffffbd;
+  opacity: 1;
+}
+
+
+
+#header {
+    text-align: center;
+}
+

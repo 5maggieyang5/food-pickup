@@ -15,12 +15,12 @@
 </head>
 
 <body>
-
+  <video autoplay muted loop id="myVideo">
+    <source src="/image/schnitzel.mp4" type="video/mp4">
+  </video>
   <% include ./partials/_header.ejs %>
-
-  <h1>Please Register:</h1>
-
-
+  <div id="registerbox">
+  <h1 id="header">Please Register:</h1>
   <form class="register" method="POST" action="/register">
     <div class="form-group">
       <label for="name">Name</label>
@@ -40,6 +40,7 @@
 
 </form>
 
+  </div>
 
 
 </body>
