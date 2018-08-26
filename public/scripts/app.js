@@ -1,3 +1,4 @@
+
 $(() => {
   /*$.ajax({
     method: "GET",
@@ -62,6 +63,13 @@ $("#placeOrder").on("click", function(event){
   .then((response)=>{});
 });
 
+$("#order").on("click", function(event){
+  $.ajax('/placeorder', {
+    type: "POST"
+  })
+  .then((response)=>{});
+   console.log('clicked')
+});
 
 
 

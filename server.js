@@ -16,6 +16,11 @@ const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+const client = require("twilio")(accountSid, authToken);
+
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
 
@@ -130,9 +135,7 @@ app.get("/myorder", (req, res) => {
       let templateVars = {
         order_list: order_list
       }
-
       console.log("orderlist: ", order_list);
-
       res.render("client_order", templateVars);
    })
 });
@@ -147,10 +150,26 @@ app.post("/myorder", (req, res) => {
     .asCallback(function(err, rows){
       if (err) return console.error(err);
     })
-  }
+    }
+
+  console.log('existing orderlist', orderlist)
+
   res.redirect("client_order")
+})
+
+app.post("/placeorder", (req, res) => {
+  console.log('button clicked, message not yet sent')
+  client.messages.create({
+      to: "+16478362725",
+      from: "+16476914595",
+      body: `You have a new order! Check your order page!`
+    })
+      .then(message => console.log('message was sent'));
 })
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+
+
