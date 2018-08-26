@@ -69,6 +69,7 @@ $("#order").on("click", function(event){
   })
   .then((response)=>{});
    console.log('clicked')
+
 });
 
 $("#updatetime").on("click", function(event){
