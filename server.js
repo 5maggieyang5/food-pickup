@@ -160,7 +160,7 @@ app.post("/myorder", (req, res) => {
 app.post("/placeorder", (req, res) => {
   console.log('button clicked, message not yet sent')
   client.messages.create({
-      to: "+16478362725",
+      to: "+17806556051",
       from: "+16476914595",
       body: `You have a new order! Check your order page!`
     })
@@ -170,7 +170,18 @@ app.post("/placeorder", (req, res) => {
 
 //restaurant owner page
 app.get("/owner", (req, res) => {
-  res.render("owner")
+  knex('order_list')
+    .select('*')
+    .where( {client_id: 1} )
+    .returning('*')
+    .asCallback(function(err, order_list){
+      if (err) return console.error(err);
+      let templateVars = {
+        order_list: order_list
+      }
+      console.log("orderlist: ", order_list);
+      res.render("owner", templateVars);
+   })
 })
 
 //twilio: sends text to customer about updating time
