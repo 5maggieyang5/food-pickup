@@ -87,6 +87,9 @@ $("#completeorder").on("click", function(event){
   .then((response)=>{});
 });
 
+$("#order").on("click", function(event){
+  $("#order-success").text("Order successed! Please check your text messages. MrDonald's will update the approx. finish time!").slideDown();
+})
 
 
 });

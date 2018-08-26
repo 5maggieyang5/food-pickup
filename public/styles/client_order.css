@@ -27,3 +27,10 @@
   margin-left: 20px;
 }
 
+#order-success {
+  padding: 1em;
+  border-radius: 5px;
+  border: 1px solid #a9a8a8;
+  background-color: #a2b9d3;
+  display: none;
+}
