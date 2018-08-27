@@ -50,7 +50,7 @@ $(() => {
     }
     console.log(totalPrice(orderlist));
 
-    $("#total_price").text("Total Price: $ " + totalPrice(orderlist));
+    $("#total_price").text("Total Price: $ " + totalPrice(orderlist).toFixed(2));
 
   });
 
@@ -87,12 +87,12 @@ $("#completeorder").on("click", function(event){
   })
   .then((response)=>{});
 
-  let $completed = $("<input>").addClass("btn btn-success").val("This order Completed!");
+  let $completed = $("<input>").addClass("btn btn-success").val("Completed!");
   $("#disappear").empty().append($completed);
 });
 
 $("#order").on("click", function(event){
-  $("#order-success").text("Order successed! Please check your text messages. MrDonald's will update the approx. finish time!").slideDown();
+  $("#order-success").text("Order success! Please check your text messages. MrDonald's will update the approx. finish time.").slideDown();
 })
 
 $("#btn1").on("click", function(){

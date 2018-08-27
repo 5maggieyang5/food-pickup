@@ -154,7 +154,7 @@ app.post("/myorder", (req, res) => {
 
   console.log('existing orderlist', orderlist)
 
-  res.redirect("client_order")
+  res.redirect("/myorder")
 })
 //twilio: sends text to owner to check orders
 app.post("/placeorder", (req, res) => {
