@@ -50,7 +50,7 @@ $(() => {
     }
     console.log(totalPrice(orderlist));
 
-    $("#total_price").text("Total Price: $ " + totalPrice(orderlist));
+    $("#total_price").text("Total Price: $ " + totalPrice(orderlist).toFixed(2));
 
   });
 
